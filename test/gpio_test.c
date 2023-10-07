@@ -23,7 +23,7 @@ int main(){
     FILE *direction_file = fopen(direction_path,"w");
     if (direction_file == NULL){
         perror("Failed to open GPUI direction file");
-	return -1;
+	    return -1;
     }
     fprintf(direction_file,"out");
     fclose(direction_file);
@@ -33,7 +33,7 @@ int main(){
     FILE *value_file = fopen(value_path,"w");
     if(value_file == NULL){
         perror("Failed to open GPIO value file");
-	return -1;
+	    return -1;
     }
     
     for(int i=0; i<300; i++){
@@ -48,5 +48,14 @@ int main(){
     }
 
     fclose(value_file);
-    return 0;
+
+	FILE *unexport_file = fopen("/sys/class/gpio/unexport", "w");
+    if (unexport_file == NULL) {
+        perror("Failed to open GPIO unexport file");
+        return -1;
+    }
+    fprintf(unexport_file, "%d", gpio_pin);
+    fclose(unexport_file);
+    
+	return 0;
 }
