@@ -1,0 +1,8 @@
+alias g='gvim'
+export LUCKFOX_IP=172.32.0.93:5555
+alias luckfox_connect='adb connect $LUCKFOX_IP'
+alias luckfox_openshell='adb -s $LUCKFOX_IP shell'
+alias luckfox_push='push_func'
+push_func(){
+adb -s $LUCKFOX_IP push $1 /
+}
