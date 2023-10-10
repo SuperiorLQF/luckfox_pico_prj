@@ -3,6 +3,14 @@ export LUCKFOX_IP=172.32.0.93:5555
 alias luckfox_connect='adb connect $LUCKFOX_IP'
 alias luckfox_openshell='adb -s $LUCKFOX_IP shell'
 alias luckfox_push='push_func'
+alias luckfox_CompileAndPush='simple_CAP_func'
 push_func(){
 adb -s $LUCKFOX_IP push $1 /
 }
+simple_CAP_func(){
+C_SRC_FILE=$1
+O_SRC_FILE=${1%c}o
+arm-rockchip830-linux-uclibcgnueabihf-gcc $C_SRC_FILE -o $O_SRC_FILE
+adb -s $LUCKFOX_IP push $O_SRC_FILE /
+}
+

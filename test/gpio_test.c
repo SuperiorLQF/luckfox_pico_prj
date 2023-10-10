@@ -15,10 +15,11 @@ int main(){
     }
     fprintf(export_file,"%d",gpio_pin);
     fclose(export_file);
+	printf("export OK");
     
     //get the direction_path
     char direction_path[50];
-    snprintf(direction_path,sizeof(direction_path),"sys/class/gpio/gpio%d/value",gpio_pin);//get the format char
+    snprintf(direction_path,sizeof(direction_path),"sys/class/gpio/gpio%d/direction",gpio_pin);//get the format char
     //specify the pin direction
     FILE *direction_file = fopen(direction_path,"w");
     if (direction_file == NULL){
@@ -36,7 +37,7 @@ int main(){
 	    return -1;
     }
     
-    for(int i=0; i<300; i++){
+    for(int i=0; i<10; i++){
         fprintf(value_file,"1");
         fflush(value_file);
 	sleep(1);
